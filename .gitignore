@@ -2,13 +2,4 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-*.vsidx
-/.vs/DevEnvirment/FileContentIndex/read.lock
-/.vs/VSWorkspaceState.json
-/ReadyToWin.API/.vs/ReadyToWin.API/config/applicationhost.config
-/ReadyToWin.API/.vs/ReadyToWin.API/v17/.suo
-/ReadyToWin.API/.vs/ReadyToWin.API/v17/fileList.bin
-/.vs/DevEnvirment/v17/.suo
-/.vs/slnx.sqlite
-/.vs/DevEnvirment/v17/workspaceFileList.bin
-/ReadyToWin.API/.vs/ReadyToWin.API/FileContentIndex/read.lock
+

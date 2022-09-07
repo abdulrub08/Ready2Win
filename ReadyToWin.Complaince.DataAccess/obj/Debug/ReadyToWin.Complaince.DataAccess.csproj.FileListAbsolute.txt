@@ -25,10 +25,6 @@ C:\Users\Abdul\Documents\GitRepos\ReadyToWin.Complaince.DataAccess\obj\Debug\Rea
 C:\Users\Abdul\Documents\GitRepos\ReadyToWin.Complaince.DataAccess\obj\Debug\ReadyToWin.Complaince.DataAccess.csproj.CopyComplete
 C:\Users\Abdul\Documents\GitRepos\ReadyToWin.Complaince.DataAccess\obj\Debug\ReadyToWin.Complaince.DataAccess.dll
 C:\Users\Abdul\Documents\GitRepos\ReadyToWin.Complaince.DataAccess\obj\Debug\ReadyToWin.Complaince.DataAccess.pdb
-C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\obj\Debug\ReadyToWin.Complaince.DataAccess.csproj.AssemblyReference.cache
-C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\obj\Debug\ReadyToWin.Complaince.DataAccess.csproj.CoreCompileInputs.cache
-C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\obj\Debug\ReadyToWin.Complaince.DataAccess.dll
-C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\obj\Debug\ReadyToWin.Complaince.DataAccess.pdb
 C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\bin\Debug\ReadyToWin.Complaince.DataAccess.dll.config
 C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\bin\Debug\ReadyToWin.Complaince.DataAccess.dll
 C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\bin\Debug\ReadyToWin.Complaince.DataAccess.pdb
@@ -51,4 +47,8 @@ C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\bin\Debug
 C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.xml
 C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.xml
 C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\bin\Debug\System.Web.Http.xml
+C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\obj\Debug\ReadyToWin.Complaince.DataAccess.csproj.AssemblyReference.cache
+C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\obj\Debug\ReadyToWin.Complaince.DataAccess.csproj.CoreCompileInputs.cache
 C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\obj\Debug\ReadyToWin.Complaince.DataAccess.csproj.CopyComplete
+C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\obj\Debug\ReadyToWin.Complaince.DataAccess.dll
+C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.Complaince.DataAccess\obj\Debug\ReadyToWin.Complaince.DataAccess.pdb

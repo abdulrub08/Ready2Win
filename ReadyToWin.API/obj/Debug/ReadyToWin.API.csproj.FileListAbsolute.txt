@@ -105,10 +105,6 @@ C:\Users\Abdul\Documents\GitRepos\ReadyToWin.API\bin\EPPlus.System.Drawing.dll
 C:\Users\Abdul\Documents\GitRepos\ReadyToWin.API\bin\Microsoft.IO.RecyclableMemoryStream.dll
 C:\Users\Abdul\Documents\GitRepos\ReadyToWin.API\bin\EPPlus.xml
 C:\Users\Abdul\Documents\GitRepos\ReadyToWin.API\bin\Microsoft.IO.RecyclableMemoryStream.xml
-C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\obj\Debug\ReadyToWin.API.csproj.AssemblyReference.cache
-C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\obj\Debug\ReadyToWin.API.csproj.CoreCompileInputs.cache
-C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\obj\Debug\ReadyToWin.API.dll
-C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\obj\Debug\ReadyToWin.API.pdb
 C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\bin\ReadyToWin.API.dll.config
 C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\bin\ReadyToWin.API.dll
 C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\bin\ReadyToWin.API.pdb
@@ -211,4 +207,8 @@ C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\bin\Unity.ServiceLocation.p
 C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\bin\Antlr3.Runtime.pdb
 C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\bin\Microsoft.Practices.EnterpriseLibrary.Data.xml
 C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\bin\Microsoft.Practices.EnterpriseLibrary.Common.xml
+C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\obj\Debug\ReadyToWin.API.csproj.AssemblyReference.cache
+C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\obj\Debug\ReadyToWin.API.csproj.CoreCompileInputs.cache
 C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\obj\Debug\ReadyToWin.API.csproj.CopyComplete
+C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\obj\Debug\ReadyToWin.API.dll
+C:\Users\Abdul\Documents\DevEnvirment\ReadyToWin.API\obj\Debug\ReadyToWin.API.pdb
