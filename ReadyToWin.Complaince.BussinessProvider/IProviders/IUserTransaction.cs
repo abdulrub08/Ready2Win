@@ -10,9 +10,10 @@ namespace ReadyToWin.Complaince.BussinessProvider.IProviders
 {
     public interface IUserTransaction
     {
-        DbOutput ListOfUserAmountDeposit(UserAmountDeposit userAmountdeposit);
-        DbOutput ListOfUserAmountDepositByUserId(UserAmountDeposit userAmountdeposit);
-        DbOutput ListOfUserAmountDepositbyId(UserAmountDeposit userAmountdeposit);
+        List<UserAmountDeposit> ListOfUserAmountDeposit(UserAmountDeposit userAmountdeposit);
+        List<UserAmountDeposit> RecentTransaction(UserAmountDeposit userAmountdeposit);
+        List<UserAmountDeposit> ListOfUserAmountDepositByUserId(UserAmountDeposit userAmountdeposit);
+        List<UserAmountDeposit> ListOfUserAmountDepositbyId(UserAmountDeposit userAmountdeposit);
         DbOutput AddUserAmountDeposit(UserAmountDeposit Add);
         DbOutput UpdateAmountDeposit(UserAmountDeposit userAmountdeposit);
         DbOutput DeleteAmountDeposit(UserAmountDeposit userAmountdeposit);

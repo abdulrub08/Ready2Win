@@ -45,8 +45,25 @@ namespace ReadyToWin.API.Controllers
        {
            var output = _iUserTransaction.ListOfUserAmountDeposit(userAmountdeposit);
            return await CreateResponse(output);
-       }       
-       [CustomAuthorize(Roles = "Admin, User")]
+       }
+
+        /// <summary>
+        /// Select perticular user amount deposited by User by record id For Admin
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [CustomAuthorize(Roles = "Admin")]
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("ListOfUserAmountDepositbyId")]
+        [ResponseType(typeof(Response<UserAmountDeposit>))]
+        public async Task<HttpResponseMessage> ListOfUserAmountDepositbyId(UserAmountDeposit userAmountdeposit)
+        {
+            var output = _iUserTransaction.ListOfUserAmountDepositbyId(userAmountdeposit);
+            return await CreateResponse(output);
+        }
+
+       [CustomAuthorize(Roles = "Admin")]
        [AllowAnonymous]
        [HttpPost]
        [Route("UpdateAmountDeposit")]
@@ -56,6 +73,7 @@ namespace ReadyToWin.API.Controllers
            var output = _iUserTransaction.UpdateAmountDeposit(userAmountdeposit);
            return await CreateResponse(output);
        }
+
 
        /// <summary>
        /// List of User withdraw request 

@@ -44,30 +44,29 @@ namespace ReadyToWin.API.Controllers
            var output = _iUserTransaction.ListOfUserAmountDepositByUserId(userAmountdeposit);
            return await CreateResponse(output);
        }
+       
+        /// <summary>
+        /// Select All user amount deposited by User Id
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        //[CustomAuthorize(Roles = "Admin")]
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("RecentTransaction")]
+        [ResponseType(typeof(Response<UserAmountDeposit>))]
+        public async Task<HttpResponseMessage> RecentTransaction(UserAmountDeposit userAmountdeposit)
+        {
+            return await CreateResponse(_iUserTransaction.RecentTransaction(userAmountdeposit));
 
-       /// <summary>
-       /// Select perticular user amount deposited by User by record id
-       /// </summary>
-       /// <param name="user"></param>
-       /// <returns></returns>
-       [CustomAuthorize(Roles = "Admin, User")]
-       [AllowAnonymous]
-       [HttpPost]
-       [Route("ListOfUserAmountDepositbyId")]
-       [ResponseType(typeof(Response<UserAmountDeposit>))]
-       public async Task<HttpResponseMessage> ListOfUserAmountDepositbyId(UserAmountDeposit userAmountdeposit)
-       {
-           var output = _iUserTransaction.ListOfUserAmountDepositbyId(userAmountdeposit);
-           return await CreateResponse(output);
-       }
-
-       /// <summary>
-       /// Add new Deosit Amount
-       /// </summary>
-       /// <param name="user"></param>
-       /// <returns></returns>
-       //[CustomAuthorize(Roles = "Admin")]
-       [AllowAnonymous]
+        }
+        /// <summary>
+        /// Add new Deosit Amount
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        //[CustomAuthorize(Roles = "Admin")]
+        [AllowAnonymous]
        [HttpPost]
        [Route("AddUserAmountDeposit")]
        [ResponseType(typeof(Response<UserAmountDeposit>))]
@@ -75,39 +74,8 @@ namespace ReadyToWin.API.Controllers
        {
            var output = _iUserTransaction.AddUserAmountDeposit(userAmountdeposit);
            return await CreateResponse(output);
-       }
-
-       /// <summary>
-       /// Update Deposit Amount.
-       /// </summary>
-       /// <param name="user"></param>
-       /// <returns></returns>
-       [CustomAuthorize(Roles = "Admin, User")]
-       [AllowAnonymous]
-       [HttpPost]
-       [Route("UpdateAmountDeposit")]
-       [ResponseType(typeof(Response<UserAmountDeposit>))]
-       public async Task<HttpResponseMessage> UpdateAmountDeposit(UserAmountDeposit userAmountdeposit)
-       {
-           var output = _iUserTransaction.UpdateAmountDeposit(userAmountdeposit);
-           return await CreateResponse(output);
-       }
-
-       /// <summary>
-       /// Update Deposit Amount.
-       /// </summary>
-       /// <param name="user"></param>
-       /// <returns></returns>
-       //[CustomAuthorize(Roles = "Admin")]
-       [AllowAnonymous]
-       [HttpPost]
-       [Route("DeleteAmountDeposit")]
-       [ResponseType(typeof(Response<UserAmountDeposit>))]
-       public async Task<HttpResponseMessage> DeleteAmountDeposit(UserAmountDeposit userAmountdeposit)
-       {
-           var output = _iUserTransaction.DeleteAmountDeposit(userAmountdeposit);
-           return await CreateResponse(output);
-       }
+       }  
+      
        /// <summary>
        /// List of User withdraw request by User Id
        /// </summary>
