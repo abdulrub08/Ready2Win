@@ -37,6 +37,7 @@ ipch/
 *.dll
 *.cache
 *.txt
+*.vsidx
 
 
 #Tools

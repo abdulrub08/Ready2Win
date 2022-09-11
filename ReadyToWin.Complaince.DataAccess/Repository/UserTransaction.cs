@@ -12,6 +12,7 @@ using ReadyToWin.Complaince.Entities.RequestModels;
 using ReadyToWin.Complaince.Entities.Dashboard;
 using ReadyToWin.Complaince.Entities.ResponseModel;
 using ReadyToWin.Complaince.BussinessProvider.IProviders;
+using ReadyToWin.Complaince.Entities.UserModel;
 
 namespace ReadyToWin.Complaince.DataAccess.Repository
 {
@@ -42,6 +43,25 @@ namespace ReadyToWin.Complaince.DataAccess.Repository
             return userRecentTransactionList;
 
         }
+        public List<UserAmountWithdraw> RecentTransactionWithdrawAmount(UserAmountWithdraw userwithdrawAmount)
+        {
+            List<UserAmountWithdraw> userRecentTransactionList = new List<UserAmountWithdraw>();
+
+            DbCommand dbCommand = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_AMOUNT_WITHDRAW);
+            _dbContextDQCPRDDB.AddInParameter(dbCommand, "UserId", DbType.Int64, userwithdrawAmount.UserId);
+            _dbContextDQCPRDDB.AddOutParameter(dbCommand, "Code", DbType.String, 4000);
+            _dbContextDQCPRDDB.AddOutParameter(dbCommand, "Message", DbType.String, 4000);
+            _dbContextDQCPRDDB.AddInParameter(dbCommand, "StatementType", DbType.String, "Recent");
+            using (IDataReader reader = _dbContextDQCPRDDB.ExecuteReader(dbCommand))
+            {
+                while (reader.Read())
+                {
+                    userRecentTransactionList.Add(GenerateFromDataReaderWithdraw(reader));
+                }
+            }
+            return userRecentTransactionList;
+
+        }
         private UserAmountDeposit GenerateFromDataReader(IDataReader reader)
         {
             UserAmountDeposit userAmount = new UserAmountDeposit();
@@ -54,6 +74,30 @@ namespace ReadyToWin.Complaince.DataAccess.Repository
             //user.DepartmentId = GetIntegerFromDataReader(reader, "Department_Id");
             userAmount.Status = GetStringFromDataReader(reader, "Status");
             userAmount.ApprovedAmount = GetDecimalFromDataReader(reader, "ApprovedAmount");
+            userAmount.Remarks = GetStringFromDataReader(reader, "Remarks");
+            userAmount.IsActive = GetBooleanFromDataReader(reader, "IsActive");
+            userAmount.IsDeleted = GetBooleanFromDataReader(reader, "IsDeleted");
+            userAmount.CreatedDate = GetDateFromDataReader(reader, "CreatedDate");
+            userAmount.CreatedBy = GetStringFromDataReader(reader, "CreatedBy");
+            userAmount.UpdatedDate = GetDateFromDataReader(reader, "UpdatedDate");
+            userAmount.UpdatedBy = GetStringFromDataReader(reader, "UpdatedBy");
+            return userAmount;
+        }
+
+        private UserAmountWithdraw GenerateFromDataReaderWithdraw(IDataReader reader)
+        {
+            UserAmountWithdraw userAmount = new UserAmountWithdraw();
+            userAmount.Id = GetLongIntegerFromDataReader(reader, "Id");
+            userAmount.UserId = GetLongIntegerFromDataReader(reader, "UserId");
+            userAmount.UserName = GetStringFromDataReader(reader, "UserName");
+            userAmount.MobileNoForPayment = GetStringFromDataReader(reader, "MobileNoForPayment");
+            userAmount.RequestedAmount = GetDecimalFromDataReader(reader, "RequestedAmount");
+            //userAmount.PaymentScreenshot = GetByteFromDataReader(reader, "PaymentScreenShot");
+            userAmount.PaymentModeId = GetIntegerFromDataReader(reader, "PaymentModeId");
+            //user.DepartmentId = GetIntegerFromDataReader(reader, "Department_Id");
+            userAmount.Status = GetStringFromDataReader(reader, "Status");
+            userAmount.ApprovedAmount = GetDecimalFromDataReader(reader, "ApprovedAmount");
+            //userAmount.isa = GetDecimalFromDataReader(reader, "ApprovedAmount");
             userAmount.Remarks = GetStringFromDataReader(reader, "Remarks");
             userAmount.IsActive = GetBooleanFromDataReader(reader, "IsActive");
             userAmount.IsDeleted = GetBooleanFromDataReader(reader, "IsDeleted");
@@ -136,6 +180,23 @@ namespace ReadyToWin.Complaince.DataAccess.Repository
             }
         }
 
+        public List<UserAmountWithdraw> ListOfUserWithdrawRequestByUserId(UserAmountWithdraw userAmountwithdraw)
+        {
+            List<UserAmountWithdraw> userAmountWithdrawbyUserId = new List<UserAmountWithdraw>();
+            DbCommand dbCommand = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_AMOUNT_WITHDRAW);
+            _dbContextDQCPRDDB.AddInParameter(dbCommand, "UserId", DbType.Int64, userAmountwithdraw.UserId);
+            _dbContextDQCPRDDB.AddOutParameter(dbCommand, "Code", DbType.String, 4000);
+            _dbContextDQCPRDDB.AddOutParameter(dbCommand, "Message", DbType.String, 4000);
+            _dbContextDQCPRDDB.AddInParameter(dbCommand, "StatementType", DbType.String, "Select By UserId");
+            using (IDataReader reader = _dbContextDQCPRDDB.ExecuteReader(dbCommand))
+            {
+                while (reader.Read())
+                {
+                    userAmountWithdrawbyUserId.Add(GenerateFromDataReaderWithdraw(reader));
+                }
+            }
+            return userAmountWithdrawbyUserId;
+        }
         public DbOutput UpdateAmountDeposit(UserAmountDeposit userAmountdeposit)
         {
             using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_AMOUNT_DEPOSIT))
@@ -161,95 +222,60 @@ namespace ReadyToWin.Complaince.DataAccess.Repository
                 };
             }
         }
-        public DbOutput DeleteAmountDeposit(UserAmountDeposit userAmountdeposit)
-        {
-            using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_AMOUNT_DEPOSIT))
-            {
-                _dbContextDQCPRDDB.AddInParameter(command, "Id", DbType.Int64, userAmountdeposit.Id);
-                _dbContextDQCPRDDB.AddInParameter(command, "UserId", DbType.Int64, userAmountdeposit.UserId);
-                _dbContextDQCPRDDB.AddInParameter(command, "isDeleted", DbType.String, userAmountdeposit.isDeleted);
-                _dbContextDQCPRDDB.AddOutParameter(command, "Code", DbType.String, 4000);
-                _dbContextDQCPRDDB.AddOutParameter(command, "Message", DbType.String, 4000);
-                _dbContextDQCPRDDB.AddInParameter(command, "StatementType", DbType.String, "Delete");
-                _dbContextDQCPRDDB.ExecuteNonQuery(command);
-                return new DbOutput()
-                {
-                    Code = Convert.ToInt32(_dbContextDQCPRDDB.GetParameterValue(command, "Code")),
-                    Message = Convert.ToString(_dbContextDQCPRDDB.GetParameterValue(command, "Message"))
-                };
-            }
-        }
+        //public DbOutput DeleteAmountDeposit(UserAmountDeposit userAmountdeposit)
+        //{
+        //    using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_AMOUNT_DEPOSIT))
+        //    {
+        //        _dbContextDQCPRDDB.AddInParameter(command, "Id", DbType.Int64, userAmountdeposit.Id);
+        //        _dbContextDQCPRDDB.AddInParameter(command, "UserId", DbType.Int64, userAmountdeposit.UserId);
+        //        _dbContextDQCPRDDB.AddInParameter(command, "isDeleted", DbType.String, userAmountdeposit.isDeleted);
+        //        _dbContextDQCPRDDB.AddOutParameter(command, "Code", DbType.String, 4000);
+        //        _dbContextDQCPRDDB.AddOutParameter(command, "Message", DbType.String, 4000);
+        //        _dbContextDQCPRDDB.AddInParameter(command, "StatementType", DbType.String, "Delete");
+        //        _dbContextDQCPRDDB.ExecuteNonQuery(command);
+        //        return new DbOutput()
+        //        {
+        //            Code = Convert.ToInt32(_dbContextDQCPRDDB.GetParameterValue(command, "Code")),
+        //            Message = Convert.ToString(_dbContextDQCPRDDB.GetParameterValue(command, "Message"))
+        //        };
+        //    }
+        //}
 
-        public DbOutput ListOfUserWithdrawRequest(UserAmountWithdraw userAmountwithdraw)
+        public List<UserAmountWithdraw> ListOfUserWithdrawRequest(UserAmountWithdraw userAmountwithdraw)
         {
-            using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_AMOUNT_WITHDRAW))
+            List<UserAmountWithdraw> userAmountWithdrawList = new List<UserAmountWithdraw>();
+            DbCommand dbCommand = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_AMOUNT_WITHDRAW);
+            _dbContextDQCPRDDB.AddOutParameter(dbCommand, "Code", DbType.String, 4000);
+            _dbContextDQCPRDDB.AddOutParameter(dbCommand, "Message", DbType.String, 4000);
+            _dbContextDQCPRDDB.AddInParameter(dbCommand, "StatementType", DbType.String, "Select");
+            using (IDataReader reader = _dbContextDQCPRDDB.ExecuteReader(dbCommand))
             {
-                _dbContextDQCPRDDB.AddInParameter(command, "UserId", DbType.Int64, userAmountwithdraw.UserId);
-                _dbContextDQCPRDDB.AddInParameter(command, "RequestedAmount", DbType.Decimal, userAmountwithdraw.RequestedAmount);
-                _dbContextDQCPRDDB.AddInParameter(command, "PaymentModeId", DbType.Int64, userAmountwithdraw.PaymentModeId);
-                _dbContextDQCPRDDB.AddInParameter(command, "GameTypeId", DbType.Int64, userAmountwithdraw.GameTypeId);
-                _dbContextDQCPRDDB.AddInParameter(command, "GameSubTypeId", DbType.Int64, userAmountwithdraw.GameSubTypeId);
-                _dbContextDQCPRDDB.AddInParameter(command, "Status", DbType.String, userAmountwithdraw.Status);
-                _dbContextDQCPRDDB.AddInParameter(command, "isActive", DbType.Boolean, userAmountwithdraw.isActive);
-                _dbContextDQCPRDDB.AddInParameter(command, "isDeleted", DbType.String, userAmountwithdraw.isDeleted);
-                _dbContextDQCPRDDB.AddOutParameter(command, "Code", DbType.String, 4000);
-                _dbContextDQCPRDDB.AddOutParameter(command, "Message", DbType.String, 4000);
-                _dbContextDQCPRDDB.AddInParameter(command, "StatementType", DbType.String, "Select");
-                _dbContextDQCPRDDB.ExecuteNonQuery(command);
-                return new DbOutput()
+                while (reader.Read())
                 {
-                    Code = Convert.ToInt32(_dbContextDQCPRDDB.GetParameterValue(command, "Code")),
-                    Message = Convert.ToString(_dbContextDQCPRDDB.GetParameterValue(command, "Message"))
-                };
+                    userAmountWithdrawList.Add(GenerateFromDataReaderWithdraw(reader));
+                }
             }
+            return userAmountWithdrawList;          
+            
         }
-        public DbOutput ListOfUserWithdrawRequestByUserId(UserAmountWithdraw userAmountwithdraw)
+       
+        public List<UserAmountWithdraw> ListOfUserWithdrawRequestbyId(UserAmountWithdraw userAmountwithdraw)
         {
-            using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_AMOUNT_WITHDRAW))
+            List<UserAmountWithdraw> userAmountWithdrawById = new List<UserAmountWithdraw>();
+            DbCommand dbCommand = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_AMOUNT_WITHDRAW);
+            _dbContextDQCPRDDB.AddInParameter(dbCommand, "Id", DbType.Int64, userAmountwithdraw.Id);
+            _dbContextDQCPRDDB.AddOutParameter(dbCommand, "Code", DbType.String, 4000);
+            _dbContextDQCPRDDB.AddOutParameter(dbCommand, "Message", DbType.String, 4000);
+            _dbContextDQCPRDDB.AddInParameter(dbCommand, "StatementType", DbType.String, "Select By RecordId");
+            using (IDataReader reader = _dbContextDQCPRDDB.ExecuteReader(dbCommand))
             {
-                _dbContextDQCPRDDB.AddInParameter(command, "Id", DbType.Int64, userAmountwithdraw.Id);
-                _dbContextDQCPRDDB.AddInParameter(command, "UserId", DbType.Int64, userAmountwithdraw.UserId);
-                _dbContextDQCPRDDB.AddInParameter(command, "RequestedAmount", DbType.Decimal, userAmountwithdraw.RequestedAmount);
-                _dbContextDQCPRDDB.AddInParameter(command, "PaymentModeId", DbType.Int64, userAmountwithdraw.PaymentModeId);
-                _dbContextDQCPRDDB.AddInParameter(command, "GameTypeId", DbType.Int64, userAmountwithdraw.GameTypeId);
-                _dbContextDQCPRDDB.AddInParameter(command, "GameSubTypeId", DbType.Int64, userAmountwithdraw.GameSubTypeId);
-                _dbContextDQCPRDDB.AddInParameter(command, "Status", DbType.String, userAmountwithdraw.Status);
-                _dbContextDQCPRDDB.AddInParameter(command, "isActive", DbType.Boolean, userAmountwithdraw.isActive);
-                _dbContextDQCPRDDB.AddInParameter(command, "isDeleted", DbType.String, userAmountwithdraw.isDeleted);
-                _dbContextDQCPRDDB.AddOutParameter(command, "Code", DbType.String, 4000);
-                _dbContextDQCPRDDB.AddOutParameter(command, "Message", DbType.String, 4000);
-                _dbContextDQCPRDDB.AddInParameter(command, "StatementType", DbType.String, "Select By UserId");
-                _dbContextDQCPRDDB.ExecuteNonQuery(command);
-                return new DbOutput()
+                while (reader.Read())
                 {
-                    Code = Convert.ToInt32(_dbContextDQCPRDDB.GetParameterValue(command, "Code")),
-                    Message = Convert.ToString(_dbContextDQCPRDDB.GetParameterValue(command, "Message"))
-                };
+                    userAmountWithdrawById.Add(GenerateFromDataReaderWithdraw(reader));
+                }
             }
-        }
-        public DbOutput ListOfUserWithdrawRequestbyId(UserAmountWithdraw userAmountwithdraw)
-        {
-            using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_AMOUNT_WITHDRAW))
-            {
-                _dbContextDQCPRDDB.AddInParameter(command, "Id", DbType.Int64, userAmountwithdraw.Id);
-                _dbContextDQCPRDDB.AddInParameter(command, "UserId", DbType.Int64, userAmountwithdraw.UserId);
-                _dbContextDQCPRDDB.AddInParameter(command, "RequestedAmount", DbType.Decimal, userAmountwithdraw.RequestedAmount);
-                _dbContextDQCPRDDB.AddInParameter(command, "PaymentModeId", DbType.Int64, userAmountwithdraw.PaymentModeId);
-                _dbContextDQCPRDDB.AddInParameter(command, "GameTypeId", DbType.Int64, userAmountwithdraw.GameTypeId);
-                _dbContextDQCPRDDB.AddInParameter(command, "GameSubTypeId", DbType.Int64, userAmountwithdraw.GameSubTypeId);
-                _dbContextDQCPRDDB.AddInParameter(command, "Status", DbType.String, userAmountwithdraw.Status);
-                _dbContextDQCPRDDB.AddInParameter(command, "isActive", DbType.Boolean, userAmountwithdraw.isActive);
-                _dbContextDQCPRDDB.AddInParameter(command, "isDeleted", DbType.String, userAmountwithdraw.isDeleted);
-                _dbContextDQCPRDDB.AddOutParameter(command, "Code", DbType.String, 4000);
-                _dbContextDQCPRDDB.AddOutParameter(command, "Message", DbType.String, 4000);
-                _dbContextDQCPRDDB.AddInParameter(command, "StatementType", DbType.String, "Select By RecordId");
-                _dbContextDQCPRDDB.ExecuteNonQuery(command);
-                return new DbOutput()
-                {
-                    Code = Convert.ToInt32(_dbContextDQCPRDDB.GetParameterValue(command, "Code")),
-                    Message = Convert.ToString(_dbContextDQCPRDDB.GetParameterValue(command, "Message"))
-                };
-            }
+            return userAmountWithdrawById;
+            
         }
         public DbOutput UserWithdrawRequest(UserAmountWithdraw userAmountwithdraw)
         {
@@ -257,10 +283,11 @@ namespace ReadyToWin.Complaince.DataAccess.Repository
             {
                 _dbContextDQCPRDDB.AddInParameter(command, "UserId", DbType.Int64, userAmountwithdraw.UserId);
                 _dbContextDQCPRDDB.AddInParameter(command, "RequestedAmount", DbType.Decimal, userAmountwithdraw.RequestedAmount);
+                _dbContextDQCPRDDB.AddInParameter(command, "MobileNoForPayment", DbType.String, userAmountwithdraw.MobileNoForPayment);
                 _dbContextDQCPRDDB.AddInParameter(command, "PaymentModeId", DbType.Int64, userAmountwithdraw.PaymentModeId);
                 _dbContextDQCPRDDB.AddInParameter(command, "GameTypeId", DbType.Int64, userAmountwithdraw.GameTypeId);
                 _dbContextDQCPRDDB.AddInParameter(command, "GameSubTypeId", DbType.Int64, userAmountwithdraw.GameSubTypeId);
-                _dbContextDQCPRDDB.AddInParameter(command, "Status", DbType.String, userAmountwithdraw.Status);
+                _dbContextDQCPRDDB.AddInParameter(command, "Status", DbType.String, "Pending");
                 _dbContextDQCPRDDB.AddInParameter(command, "isActive", DbType.Boolean, userAmountwithdraw.isActive);
                 _dbContextDQCPRDDB.AddInParameter(command, "isDeleted", DbType.String, userAmountwithdraw.isDeleted);
                 _dbContextDQCPRDDB.AddOutParameter(command, "Code", DbType.String, 4000);
@@ -300,23 +327,23 @@ namespace ReadyToWin.Complaince.DataAccess.Repository
                 };
             }
         }
-        public DbOutput DeleteWithdrawRequest(UserAmountWithdraw userAmountwithdraw)
-        {
-            using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_AMOUNT_WITHDRAW))
-            {
-                _dbContextDQCPRDDB.AddInParameter(command, "Id", DbType.Int64, userAmountwithdraw.Id);
-                _dbContextDQCPRDDB.AddInParameter(command, "UserId", DbType.Int64, userAmountwithdraw.UserId);
-                _dbContextDQCPRDDB.AddOutParameter(command, "Code", DbType.String, 4000);
-                _dbContextDQCPRDDB.AddOutParameter(command, "Message", DbType.String, 4000);
-                _dbContextDQCPRDDB.AddInParameter(command, "StatementType", DbType.String, "Delete");
-                _dbContextDQCPRDDB.ExecuteNonQuery(command);
-                return new DbOutput()
-                {
-                    Code = Convert.ToInt32(_dbContextDQCPRDDB.GetParameterValue(command, "Code")),
-                    Message = Convert.ToString(_dbContextDQCPRDDB.GetParameterValue(command, "Message"))
-                };
-            }
-        }
+        //public DbOutput DeleteWithdrawRequest(UserAmountWithdraw userAmountwithdraw)
+        //{
+        //    using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_AMOUNT_WITHDRAW))
+        //    {
+        //        _dbContextDQCPRDDB.AddInParameter(command, "Id", DbType.Int64, userAmountwithdraw.Id);
+        //        _dbContextDQCPRDDB.AddInParameter(command, "UserId", DbType.Int64, userAmountwithdraw.UserId);
+        //        _dbContextDQCPRDDB.AddOutParameter(command, "Code", DbType.String, 4000);
+        //        _dbContextDQCPRDDB.AddOutParameter(command, "Message", DbType.String, 4000);
+        //        _dbContextDQCPRDDB.AddInParameter(command, "StatementType", DbType.String, "Delete");
+        //        _dbContextDQCPRDDB.ExecuteNonQuery(command);
+        //        return new DbOutput()
+        //        {
+        //            Code = Convert.ToInt32(_dbContextDQCPRDDB.GetParameterValue(command, "Code")),
+        //            Message = Convert.ToString(_dbContextDQCPRDDB.GetParameterValue(command, "Message"))
+        //        };
+        //    }
+        //}
         public int UserGameSelectionSubmit(UserGameSelection userGameSelection)
         {
             int count = 0;
@@ -338,8 +365,17 @@ namespace ReadyToWin.Complaince.DataAccess.Repository
                 return count;
                 
             }
-        }  
+        }
+        public decimal GetUserTotalAmount(long Id)
+        {
+            decimal TotalAmount = 0;
+            using (DbCommand dbCommand = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.GET_USER_TOTAL_AMOUNT))
+            {
+                _dbContextDQCPRDDB.AddInParameter(dbCommand, "UserId", DbType.Int64, Id);
+                TotalAmount = Convert.ToDecimal(_dbContextDQCPRDDB.ExecuteScalar(dbCommand));
+            }
+            return TotalAmount;
+        }
 
-        
     }
 }

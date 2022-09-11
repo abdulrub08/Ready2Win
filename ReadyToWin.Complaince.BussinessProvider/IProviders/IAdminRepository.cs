@@ -15,7 +15,7 @@ namespace ReadyToWin.Complaince.BussinessProvider.IProviders
         DbOutput ListOfWinningUsers(Admin listOfwinningUser);
         DbOutput ListOfWinningUsersById(Admin listOfwinningUserbyId);
         DbOutput UpdateWinningUser(Admin updateWiinerUserDetails);
-        DbOutput DeleteWinningUser(Admin deleteWinnerUser);
+        //DbOutput DeleteWinningUser(Admin deleteWinnerUser);
         DbOutput UserDepositAmountApproved(Admin approvedAmount);
 
         DbOutput UserWithdrawAmountApproved(Admin approvedAmount);

@@ -114,23 +114,23 @@ namespace ReadyToWin.Complaince.DataAccess.Repository
 
         }
 
-        public DbOutput DeleteWinningUser(Admin deleteWinnerUser)
-        {
-            using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_WINNER_AMOUNT))
-            {
-                _dbContextDQCPRDDB.AddInParameter(command, "Id", DbType.Int64, deleteWinnerUser.Id);
-                _dbContextDQCPRDDB.AddInParameter(command, "UserId", DbType.Int64, deleteWinnerUser.UserId);
-                _dbContextDQCPRDDB.AddOutParameter(command, "Code", DbType.String, 4000);
-                _dbContextDQCPRDDB.AddOutParameter(command, "Message", DbType.String, 4000);
-                _dbContextDQCPRDDB.AddInParameter(command, "StatementType", DbType.String, "Delete");
-                _dbContextDQCPRDDB.ExecuteNonQuery(command);
-                return new DbOutput()
-                {
-                    Code = Convert.ToInt32(_dbContextDQCPRDDB.GetParameterValue(command, "Code")),
-                    Message = Convert.ToString(_dbContextDQCPRDDB.GetParameterValue(command, "Message"))
-                };
-            }
-        }
+        //public DbOutput DeleteWinningUser(Admin deleteWinnerUser)
+        //{
+        //    using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_WINNER_AMOUNT))
+        //    {
+        //        _dbContextDQCPRDDB.AddInParameter(command, "Id", DbType.Int64, deleteWinnerUser.Id);
+        //        _dbContextDQCPRDDB.AddInParameter(command, "UserId", DbType.Int64, deleteWinnerUser.UserId);
+        //        _dbContextDQCPRDDB.AddOutParameter(command, "Code", DbType.String, 4000);
+        //        _dbContextDQCPRDDB.AddOutParameter(command, "Message", DbType.String, 4000);
+        //        _dbContextDQCPRDDB.AddInParameter(command, "StatementType", DbType.String, "Delete");
+        //        _dbContextDQCPRDDB.ExecuteNonQuery(command);
+        //        return new DbOutput()
+        //        {
+        //            Code = Convert.ToInt32(_dbContextDQCPRDDB.GetParameterValue(command, "Code")),
+        //            Message = Convert.ToString(_dbContextDQCPRDDB.GetParameterValue(command, "Message"))
+        //        };
+        //    }
+        //}
         public DbOutput UserDepositAmountApproved(Admin approvedAmount)
         {
             using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_DEPOSIT_AMOUNT_APPROVED))
@@ -159,6 +159,8 @@ namespace ReadyToWin.Complaince.DataAccess.Repository
                 _dbContextDQCPRDDB.AddInParameter(command, "ApprovedAmount", DbType.Decimal, approvedAmount.ApprovedAmount);
                 _dbContextDQCPRDDB.AddInParameter(command, "Remarks", DbType.String, approvedAmount.Remarks);
                 _dbContextDQCPRDDB.AddInParameter(command, "AdminUserId", DbType.Int64, approvedAmount.AdminUserId);
+                _dbContextDQCPRDDB.AddOutParameter(command, "Code", DbType.String, 4000);
+                _dbContextDQCPRDDB.AddOutParameter(command, "Message", DbType.String, 4000);
                 _dbContextDQCPRDDB.ExecuteNonQuery(command);
                 return new DbOutput()
                 {
