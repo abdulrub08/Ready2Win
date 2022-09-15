@@ -3,3 +3,14 @@
 ################################################################################
 
 
+/EmailServer/bin
+/EmailServer/obj/Debug
+*.dll
+*.cache
+/ReadyToWin.API/.vs/ProjectEvaluation
+/ReadyToWin.API/.vs/ReadyToWin.API/DesignTimeBuild
+/ReadyToWin.API/.vs/ReadyToWin.API/FileContentIndex/merges
+*.vsidx
+*.v1
+/ReadyToWin.API/obj/Release/Package/PackageTmp/bin
+*.pdb
