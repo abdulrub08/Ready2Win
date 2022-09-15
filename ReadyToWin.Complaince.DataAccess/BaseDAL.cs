@@ -12,6 +12,7 @@ namespace ReadyToWin.Complaince.DataAccess
    public class BaseDAL
     {
         protected const string C_Connection = "DQC_SQL_PRD_Connection";
+        protected const string C_Connection_Big = "BigCommerce_Connection";
         public TransactionOptions trans = new TransactionOptions();
 
         public BaseDAL()

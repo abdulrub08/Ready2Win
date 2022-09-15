@@ -41,6 +41,7 @@ ipch/
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /EmailServer/bin
 /EmailServer/obj/Debug
 *.dll
@@ -105,3 +106,102 @@ ReadyToWin.API/obj/Debug/ReadyToWin.API.dll
 ReadyToWin.API/obj/Debug/ReadyToWin.API.csproj.FileListAbsolute.txt
 ReadyToWin.Complaince.BussinessProvider/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 >>>>>>> eadef974589bb89343740db2efa5ff4901ad9f5c
+=======
+*.dll
+*.exe
+*.pdb
+/EmailSend/bin/Debug/net6.0/EmailSend.runtimeconfig.json
+/EmailSend/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+/EmailSend/bin/Debug/net6.0/EmailSend.deps.json
+*.cache
+*.BuildWithSkipAnalyzers
+/EmailSend/obj/Debug/net6.0/EmailSend.csproj.FileListAbsolute.txt
+/EmailSend/obj/Debug/net6.0/EmailSend.GlobalUsings.g.cs
+/EmailSend/obj/Debug/net6.0/EmailSend.GeneratedMSBuildEditorConfig.editorconfig
+/EmailSend/obj/project.assets.json
+/EmailSend/obj/EmailSend.csproj.nuget.g.targets
+/EmailSend/obj/EmailSend.csproj.nuget.g.props
+/EmailSend/obj/EmailSend.csproj.nuget.dgspec.json
+/EmailSend/EmailSend.csproj
+/ReadyToWin.API/.vs/ProjectEvaluation
+*.vsidx
+*.v2
+*.v1
+*.vs
+# Files built by Visual Studio
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# Chutzpah Test files
+_Chutzpah*
+
+# Visual C++ cache files
+ipch/
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# Visual Studio Trace Files
+*.e2e
+
+# TFS 2012 Local Workspace
+$tf/
+
+# VS Code files for those working on multiple tools
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+# Windows Installer files from build outputs
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# JetBrains Rider
+*.sln.iml
+>>>>>>> 1a53ef7d7968b568ac58a29dab4b1d4dbf082322
