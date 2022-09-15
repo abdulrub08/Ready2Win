@@ -39,9 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IProviders\ICreateQutation.cs" />
     <Compile Include="IProviders\IGameType.cs" />
     <Compile Include="IProviders\IUserRepository.cs" />
     <Compile Include="IProviders\IUserTransaction.cs" />
+    <Compile Include="IProviders\IVendorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

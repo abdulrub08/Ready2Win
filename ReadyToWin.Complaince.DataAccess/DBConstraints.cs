@@ -9,7 +9,10 @@ namespace ReadyToWin.Complaince.DataAccess
     class DBConstraints
     {   
         public const string IdParam = "In_ProjectStatusKey";
-
+        //Big Commerce User
+        public const string INSERT_USER_Qutation = "usp_insert_qutation";
+        public const string INSERT_VENDOR_Qutation = "usp_insert_vendor_reply";
+        public const string GET_ALL_Vendor_Email = "usp_select__all_vendor_Email";
         //GameType
         public const string ALL_GAMETYPE = "usp_select_gametype";
         public const string ALL_GAMECATEGORY = "usp_select_gamecatbyid";

@@ -1,0 +1,6 @@
+C:\Users\Abdul\Documents\DevEnvirment\EmailServer\bin\Debug\EmailServer.dll
+C:\Users\Abdul\Documents\DevEnvirment\EmailServer\bin\Debug\EmailServer.pdb
+C:\Users\Abdul\Documents\DevEnvirment\EmailServer\obj\Debug\EmailServer.csproj.AssemblyReference.cache
+C:\Users\Abdul\Documents\DevEnvirment\EmailServer\obj\Debug\EmailServer.csproj.CoreCompileInputs.cache
+C:\Users\Abdul\Documents\DevEnvirment\EmailServer\obj\Debug\EmailServer.dll
+C:\Users\Abdul\Documents\DevEnvirment\EmailServer\obj\Debug\EmailServer.pdb
