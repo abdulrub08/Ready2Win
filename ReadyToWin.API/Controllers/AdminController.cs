@@ -30,23 +30,70 @@ namespace ReadyToWin.API.Controllers
            this._iUserTransaction = _iUserTransaction;
            this._iAdminRepository = _iAdminRepository;
        }
+        /// <summary>
+        /// Delete Winner User Details 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [CustomAuthorize(Roles = "Admin")]
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("UserDepositAmountApproved")]
+        [ResponseType(typeof(Response<Admin>))]
+        public async Task<HttpResponseMessage> UserDepositAmountApproved(Admin userAmountApproved)
+        {
+            var output = _iAdminRepository.UserDepositAmountApproved(userAmountApproved);
+            return await CreateResponse(output);
+        }
 
-       /// <summary>
-       /// Select All user amount deposited
-       /// </summary>
-       /// <param name="user"></param>
-       /// <returns></returns>
-       [CustomAuthorize(Roles = "Admin")]
+        /// <summary>
+        /// Delete Winner User Details 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [CustomAuthorize(Roles = "Admin")]
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("UserWithdrawAmountApproved")]
+        [ResponseType(typeof(Response<Admin>))]
+        public async Task<HttpResponseMessage> UserWithdrawAmountApproved(Admin userAmountWithdraw)
+        {
+            var output = _iAdminRepository.UserWithdrawAmountApproved(userAmountWithdraw);
+            return await CreateResponse(output);
+        }
+        /// <summary>
+        /// Select All user amount deposited
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [CustomAuthorize(Roles = "Admin")]
        [AllowAnonymous]
-       [HttpPost]
+       [HttpGet]
        [Route("ListOfUserAmountDeposit")]
        [ResponseType(typeof(Response<Admin>))]
        public async Task<HttpResponseMessage> ListOfUserAmountDeposit(UserAmountDeposit userAmountdeposit)
        {
            var output = _iUserTransaction.ListOfUserAmountDeposit(userAmountdeposit);
            return await CreateResponse(output);
-       }       
-       [CustomAuthorize(Roles = "Admin, User")]
+       }
+
+        /// <summary>
+        /// Select perticular user amount deposited by User by record id For Admin
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [CustomAuthorize(Roles = "Admin")]
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("ListOfUserAmountDepositbyId")]
+        [ResponseType(typeof(Response<UserAmountDeposit>))]
+        public async Task<HttpResponseMessage> ListOfUserAmountDepositbyId(UserAmountDeposit userAmountdeposit)
+        {
+            var output = _iUserTransaction.ListOfUserAmountDepositbyId(userAmountdeposit);
+            return await CreateResponse(output);
+        }
+
+       [CustomAuthorize(Roles = "Admin")]
        [AllowAnonymous]
        [HttpPost]
        [Route("UpdateAmountDeposit")]
@@ -57,6 +104,7 @@ namespace ReadyToWin.API.Controllers
            return await CreateResponse(output);
        }
 
+
        /// <summary>
        /// List of User withdraw request 
        /// </summary>
@@ -64,19 +112,35 @@ namespace ReadyToWin.API.Controllers
        /// <returns></returns>
        [CustomAuthorize(Roles = "Admin")]
        [AllowAnonymous]
-       [HttpPost]
+       [HttpGet]
        [Route("ListOfUserWithdrawRequest")]
        [ResponseType(typeof(Response<Admin>))]
        public async Task<HttpResponseMessage> ListOfUserWithdrawRequest(UserAmountWithdraw userAmountwithdraw)
        {
            var output = _iUserTransaction.ListOfUserWithdrawRequest(userAmountwithdraw);
            return await CreateResponse(output);
-       }       
-       /// <summary>
-       /// Update UserWithdraw Request.
-       /// </summary>
-       /// <param name="user"></param>
-       /// <returns></returns>
+       }
+
+        /// <summary>
+        /// List of User withdraw request 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        [CustomAuthorize(Roles = "Admin")]
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("ListOfUserWithdrawRequestbyId")]
+        [ResponseType(typeof(Response<Admin>))]
+        public async Task<HttpResponseMessage> ListOfUserWithdrawRequestbyId(UserAmountWithdraw userAmountwithdraw)
+        {
+            var output = _iUserTransaction.ListOfUserWithdrawRequestbyId(userAmountwithdraw);
+            return await CreateResponse(output);
+        }
+        /// <summary>
+        /// Update UserWithdraw Request.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
        [CustomAuthorize(Roles = "Admin, User")]
        [AllowAnonymous]
        [HttpPost]
@@ -87,21 +151,21 @@ namespace ReadyToWin.API.Controllers
            var output = _iUserTransaction.UpdateWithdrawRequest(userAmountwithdraw);
            return await CreateResponse(output);
        }
-       /// <summary>
-       /// Update UserWithdraw Request.
-       /// </summary>
-       /// <param name="user"></param>
-       /// <returns></returns>
-       //[CustomAuthorize(Roles = "Admin")]
-       [AllowAnonymous]
-       [HttpPost]
-       [Route("DeleteWithdrawRequest")]
-       [ResponseType(typeof(Response<Admin>))]
-       public async Task<HttpResponseMessage> DeleteWithdrawRequest(UserAmountWithdraw userAmountwithdraw)
-       {
-           var output = _iUserTransaction.DeleteWithdrawRequest(userAmountwithdraw);
-           return await CreateResponse(output);
-       }
+       ///// <summary>
+       ///// Update UserWithdraw Request.
+       ///// </summary>
+       ///// <param name="user"></param>
+       ///// <returns></returns>
+       ////[CustomAuthorize(Roles = "Admin")]
+       //[AllowAnonymous]
+       //[HttpPost]
+       //[Route("DeleteWithdrawRequest")]
+       //[ResponseType(typeof(Response<Admin>))]
+       //public async Task<HttpResponseMessage> DeleteWithdrawRequest(UserAmountWithdraw userAmountwithdraw)
+       //{
+       //    var output = _iUserTransaction.DeleteWithdrawRequest(userAmountwithdraw);
+       //    return await CreateResponse(output);
+       //}
 
        /// <summary>
        /// Insert Winning Amount For User
@@ -172,47 +236,16 @@ namespace ReadyToWin.API.Controllers
        /// </summary>
        /// <param name="user"></param>
        /// <returns></returns>
-       [CustomAuthorize(Roles = "Admin")]
-       [AllowAnonymous]
-       [HttpPost]
-       [Route("DeleteWinningUser")]
-       [ResponseType(typeof(Response<Admin>))]
-       public async Task<HttpResponseMessage> DeleteWinningUser(Admin deleteWinningUser)
-       {
-           var output = _iAdminRepository.DeleteWinningUser(deleteWinningUser);
-           return await CreateResponse(output);
-       }
-
-       /// <summary>
-       /// Delete Winner User Details 
-       /// </summary>
-       /// <param name="user"></param>
-       /// <returns></returns>
-       [CustomAuthorize(Roles = "Admin")]
-       [AllowAnonymous]
-       [HttpPost]
-       [Route("UserDepositAmountApproved")]
-       [ResponseType(typeof(Response<Admin>))]
-       public async Task<HttpResponseMessage> UserDepositAmountApproved(Admin deleteWinningUser)
-       {
-           var output = _iAdminRepository.UserDepositAmountApproved(deleteWinningUser);
-           return await CreateResponse(output);
-       }
-
-       /// <summary>
-       /// Delete Winner User Details 
-       /// </summary>
-       /// <param name="user"></param>
-       /// <returns></returns>
-       [CustomAuthorize(Roles = "Admin")]
-       [AllowAnonymous]
-       [HttpPost]
-       [Route("UserWithdrawAmountApproved")]
-       [ResponseType(typeof(Response<Admin>))]
-       public async Task<HttpResponseMessage> UserWithdrawAmountApproved(Admin deleteWinningUser)
-       {
-           var output = _iAdminRepository.UserWithdrawAmountApproved(deleteWinningUser);
-           return await CreateResponse(output);
-       }
+       //[CustomAuthorize(Roles = "Admin")]
+       //[AllowAnonymous]
+       //[HttpPost]
+       //[Route("DeleteWinningUser")]
+       //[ResponseType(typeof(Response<Admin>))]
+       //public async Task<HttpResponseMessage> DeleteWinningUser(Admin deleteWinningUser)
+       //{
+       //    var output = _iAdminRepository.DeleteWinningUser(deleteWinningUser);
+       //    return await CreateResponse(output);
+       //}
+       
     }
 }

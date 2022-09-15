@@ -16,6 +16,9 @@ namespace ReadyToWin.Complaince.Entities.UserTransaction
         [Required]
         [Display(Name = "UserRequestedAmount")]
         public decimal RequestedAmount { get; set; }
+        public string MobileNoForPayment { get; set; }
+
+        public string UserName { get; set; }
         public string Status { get; set; }
         public decimal ApprovedAmount { get; set; }
         public long PaymentModeId { get; set; }
