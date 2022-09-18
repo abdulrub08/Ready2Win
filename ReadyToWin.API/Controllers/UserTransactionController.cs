@@ -39,8 +39,9 @@ namespace ReadyToWin.API.Controllers
        [HttpGet]
        [Route("ListOfUserAmountDepositByUserId")]
        [ResponseType(typeof(Response<UserAmountDeposit>))]
-       public async Task<HttpResponseMessage> ListOfUserAmountDepositByUserId(UserAmountDeposit userAmountdeposit)
+       public async Task<HttpResponseMessage> ListOfUserAmountDepositByUserId(long UserId)
        {
+           UserAmountDeposit userAmountdeposit = new UserAmountDeposit() { UserId= UserId };
            var output = _iUserTransaction.ListOfUserAmountDepositByUserId(userAmountdeposit);
            return await CreateResponse(output);
        }
@@ -55,8 +56,9 @@ namespace ReadyToWin.API.Controllers
         [HttpGet]
         [Route("RecentTransaction")]
         [ResponseType(typeof(Response<UserAmountDeposit>))]
-        public async Task<HttpResponseMessage> RecentTransaction(UserAmountDeposit userAmountdeposit)
+        public async Task<HttpResponseMessage> RecentTransaction(long UserId)
         {
+            UserAmountDeposit userAmountdeposit = new UserAmountDeposit() { UserId = UserId };
             return await CreateResponse(_iUserTransaction.RecentTransaction(userAmountdeposit));
 
         }
@@ -102,9 +104,10 @@ namespace ReadyToWin.API.Controllers
        [HttpGet]
        [Route("ListOfUserWithdrawRequestByUserId")]
        [ResponseType(typeof(Response<UserAmountWithdraw>))]
-       public async Task<HttpResponseMessage> ListOfUserWithdrawRequestByUserId(UserAmountWithdraw userAmountwithdraw)
+       public async Task<HttpResponseMessage> ListOfUserWithdrawRequestByUserId(long UserId)
        {
-           var output = _iUserTransaction.ListOfUserWithdrawRequestByUserId(userAmountwithdraw);
+            UserAmountWithdraw userAmountwithdraw = new UserAmountWithdraw() { UserId = UserId };
+            var output = _iUserTransaction.ListOfUserWithdrawRequestByUserId(userAmountwithdraw);
            return await CreateResponse(output);
        }
         /// <summary>
@@ -116,9 +119,10 @@ namespace ReadyToWin.API.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("RecentTransactionWithdrawAmount")]
-        [ResponseType(typeof(Response<UserAmountDeposit>))]
-        public async Task<HttpResponseMessage> RecentTransactionWithdrawAmount(UserAmountWithdraw userAmountwithdraw)
+        [ResponseType(typeof(Response<UserAmountWithdraw>))]
+        public async Task<HttpResponseMessage> RecentTransactionWithdrawAmount(long UserId)
         {
+            UserAmountWithdraw userAmountwithdraw = new UserAmountWithdraw() { UserId = UserId };
             return await CreateResponse(_iUserTransaction.RecentTransactionWithdrawAmount(userAmountwithdraw));
 
         }
@@ -159,9 +163,9 @@ namespace ReadyToWin.API.Controllers
         [HttpGet]
         [Route("GetUserTotalAmount")]
         [ResponseType(typeof(string))]
-        public async Task<HttpResponseMessage> GetUserTotalAmount()
+        public async Task<HttpResponseMessage> GetUserTotalAmount(long Id)
         {
-            decimal count = _iUserTransaction.GetUserTotalAmount(6);
+            decimal count = _iUserTransaction.GetUserTotalAmount(Id);
             return await CreateResponse(count.ToString());
         }
 

@@ -87,8 +87,9 @@ namespace ReadyToWin.API.Controllers
         [HttpGet]
         [Route("ListOfUserAmountDepositbyId")]
         [ResponseType(typeof(Response<UserAmountDeposit>))]
-        public async Task<HttpResponseMessage> ListOfUserAmountDepositbyId(UserAmountDeposit userAmountdeposit)
+        public async Task<HttpResponseMessage> ListOfUserAmountDepositbyId(long Id)
         {
+            UserAmountDeposit userAmountdeposit = new UserAmountDeposit() { Id = Id };
             var output = _iUserTransaction.ListOfUserAmountDepositbyId(userAmountdeposit);
             return await CreateResponse(output);
         }
@@ -131,8 +132,9 @@ namespace ReadyToWin.API.Controllers
         [HttpGet]
         [Route("ListOfUserWithdrawRequestbyId")]
         [ResponseType(typeof(Response<Admin>))]
-        public async Task<HttpResponseMessage> ListOfUserWithdrawRequestbyId(UserAmountWithdraw userAmountwithdraw)
+        public async Task<HttpResponseMessage> ListOfUserWithdrawRequestbyId(long Id)
         {
+            UserAmountWithdraw userAmountwithdraw = new UserAmountWithdraw() { Id = Id };
             var output = _iUserTransaction.ListOfUserWithdrawRequestbyId(userAmountwithdraw);
             return await CreateResponse(output);
         }
