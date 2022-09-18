@@ -4,3 +4,9 @@ C:\Users\Abdul\Documents\DevEnvirment\EmailServer\obj\Debug\EmailServer.csproj.A
 C:\Users\Abdul\Documents\DevEnvirment\EmailServer\obj\Debug\EmailServer.csproj.CoreCompileInputs.cache
 C:\Users\Abdul\Documents\DevEnvirment\EmailServer\obj\Debug\EmailServer.dll
 C:\Users\Abdul\Documents\DevEnvirment\EmailServer\obj\Debug\EmailServer.pdb
+E:\2022-Projects\R2Enjoy\Ready2Win\EmailServer\bin\Debug\EmailServer.dll
+E:\2022-Projects\R2Enjoy\Ready2Win\EmailServer\bin\Debug\EmailServer.pdb
+E:\2022-Projects\R2Enjoy\Ready2Win\EmailServer\obj\Debug\EmailServer.csproj.AssemblyReference.cache
+E:\2022-Projects\R2Enjoy\Ready2Win\EmailServer\obj\Debug\EmailServer.csproj.CoreCompileInputs.cache
+E:\2022-Projects\R2Enjoy\Ready2Win\EmailServer\obj\Debug\EmailServer.dll
+E:\2022-Projects\R2Enjoy\Ready2Win\EmailServer\obj\Debug\EmailServer.pdb

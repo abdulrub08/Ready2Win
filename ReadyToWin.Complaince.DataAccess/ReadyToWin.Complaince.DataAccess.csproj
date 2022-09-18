@@ -58,11 +58,8 @@
     <Compile Include="BaseDAL.cs" />
     <Compile Include="DBConstraints.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< HEAD
     <Compile Include="Repository\AdminRepository.cs" />
-=======
     <Compile Include="Repository\CreateQutation.cs" />
->>>>>>> 1a53ef7d7968b568ac58a29dab4b1d4dbf082322
     <Compile Include="Repository\GameTypeRepository.cs" />
     <Compile Include="Repository\TokenRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />

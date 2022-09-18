@@ -6,10 +6,6 @@ using Owin;
 using System.Web.Http;
 using Microsoft.Owin.Cors;
 using ReadyToWin.API.Models;
-using Microsoft.Extensions.DependencyInjection;
-using ReadyToWin.Complaince.DataAccess.Repository;
-using ReadyToWin.Complaince.BussinessProvider.IProviders;
-using EmailServer;
 
 [assembly: OwinStartup(typeof(ReadyToWin.API.Startup))]
 
@@ -18,11 +14,7 @@ namespace ReadyToWin.API
     public class Startup
     {
 
-        //public void ConfigureServices(IServiceCollection services)
-        //{
-        //    services.AddSingleton<ICreateQutation, CreateQutation>();
-        //    services.AddSingleton<ISmtpClient, SMTPClient>();
-        //}
+        
             /// <summary>
             /// 
             /// </summary>

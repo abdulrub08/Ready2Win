@@ -39,11 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="IProviders\IAdminRepository.cs" />
-=======
     <Compile Include="IProviders\ICreateQutation.cs" />
->>>>>>> 1a53ef7d7968b568ac58a29dab4b1d4dbf082322
     <Compile Include="IProviders\IGameType.cs" />
     <Compile Include="IProviders\IUserRepository.cs" />
     <Compile Include="IProviders\IUserTransaction.cs" />
