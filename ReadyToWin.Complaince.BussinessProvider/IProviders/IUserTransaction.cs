@@ -12,7 +12,7 @@ namespace ReadyToWin.Complaince.BussinessProvider.IProviders
 {
     public interface IUserTransaction
     {
-        List<UserAmountDeposit> ListOfUserAmountDeposit(UserAmountDeposit userAmountdeposit);
+        List<UserAmountDeposit> ListOfUserAmountDeposit();
         List<UserAmountDeposit> RecentTransaction(UserAmountDeposit userAmountdeposit);
         List<UserAmountWithdraw> RecentTransactionWithdrawAmount(UserAmountWithdraw userAmountwithdraw);
         List<UserAmountDeposit> ListOfUserAmountDepositByUserId(UserAmountDeposit userAmountdeposit);
@@ -20,7 +20,7 @@ namespace ReadyToWin.Complaince.BussinessProvider.IProviders
         DbOutput AddUserAmountDeposit(UserAmountDeposit Add);
         DbOutput UpdateAmountDeposit(UserAmountDeposit userAmountdeposit);
         //DbOutput DeleteAmountDeposit(UserAmountDeposit userAmountdeposit);
-        List<UserAmountWithdraw> ListOfUserWithdrawRequest(UserAmountWithdraw userAmountwithdraw);
+        List<UserAmountWithdraw> ListOfUserWithdrawRequest();
         List<UserAmountWithdraw> ListOfUserWithdrawRequestByUserId(UserAmountWithdraw userAmountwithdraw);
         List<UserAmountWithdraw> ListOfUserWithdrawRequestbyId(UserAmountWithdraw userAmountwithdraw);
         DbOutput UserWithdrawRequest(UserAmountWithdraw userAmountwithdraw);

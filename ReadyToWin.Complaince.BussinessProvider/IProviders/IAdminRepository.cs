@@ -12,8 +12,9 @@ namespace ReadyToWin.Complaince.BussinessProvider.IProviders
     public interface IAdminRepository
     {
         DbOutput InsertWinningAmountForUser(Admin winnerUser);
-        DbOutput ListOfWinningUsers(Admin listOfwinningUser);
-        DbOutput ListOfWinningUsersById(Admin listOfwinningUserbyId);
+        List<Admin> ListOfWinningUsers();
+        List<Admin> ListOfWinningUsersById(Admin Id);
+        List<Admin> ListOfUserWinningByUserId(Admin userWinbyUserId);
         DbOutput UpdateWinningUser(Admin updateWiinerUserDetails);
         //DbOutput DeleteWinningUser(Admin deleteWinnerUser);
         DbOutput UserDepositAmountApproved(Admin approvedAmount);

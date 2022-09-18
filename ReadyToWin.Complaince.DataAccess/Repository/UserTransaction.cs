@@ -107,7 +107,7 @@ namespace ReadyToWin.Complaince.DataAccess.Repository
             userAmount.UpdatedBy = GetStringFromDataReader(reader, "UpdatedBy");
             return userAmount;
         }
-        public List<UserAmountDeposit> ListOfUserAmountDeposit(UserAmountDeposit userAmountdeposit)
+        public List<UserAmountDeposit> ListOfUserAmountDeposit()
         {
             List<UserAmountDeposit> userTransactionList = new List<UserAmountDeposit>();
             DbCommand dbCommand = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_AMOUNT_DEPOSIT);            
@@ -241,7 +241,7 @@ namespace ReadyToWin.Complaince.DataAccess.Repository
         //    }
         //}
 
-        public List<UserAmountWithdraw> ListOfUserWithdrawRequest(UserAmountWithdraw userAmountwithdraw)
+        public List<UserAmountWithdraw> ListOfUserWithdrawRequest()
         {
             List<UserAmountWithdraw> userAmountWithdrawList = new List<UserAmountWithdraw>();
             DbCommand dbCommand = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_AMOUNT_WITHDRAW);

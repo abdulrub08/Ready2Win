@@ -26,9 +26,7 @@ namespace ReadyToWin.API
             
             HttpConfiguration config = new HttpConfiguration();
             WebApiConfig.Register(config);
-            UnityConfig.RegisterComponents(config);
-
-            
+            UnityConfig.RegisterComponents(config);            
             app.UseWebApi(config);
 
             //app.Use(async (context, next) =>
