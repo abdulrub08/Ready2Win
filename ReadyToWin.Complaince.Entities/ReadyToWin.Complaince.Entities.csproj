@@ -99,6 +99,10 @@
     <Compile Include="MasterModel\Picture.cs" />
     <Compile Include="MasterModel\ProductPicture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QutationRepositry\Customer.cs" />
+    <Compile Include="QutationRepositry\Products.cs" />
+    <Compile Include="QutationRepositry\Qutation.cs" />
+    <Compile Include="QutationRepositry\Vendor.cs" />
     <Compile Include="RequestModel\ChangePolicy.cs" />
     <Compile Include="RequestModel\CreateTemplate.cs" />
     <Compile Include="RequestModel\GridRequestModel.cs" />
@@ -120,6 +124,7 @@
     <Compile Include="UserTransaction\UserAmountWithdraw.cs" />
     <Compile Include="UserTransaction\UserGameSelection.cs" />
     <Compile Include="ValidationErrorModel\ValidationError.cs" />
+    <Compile Include="Vendor\VendorEmail.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Discounts\" />
