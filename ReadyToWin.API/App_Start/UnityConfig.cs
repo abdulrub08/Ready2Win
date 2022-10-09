@@ -26,9 +26,11 @@ namespace ReadyToWin.API
             container.RegisterType<IGameType, GameTypeRepository>();
             container.RegisterType<IUserRepository, UserRepository>();
             container.RegisterType<IUserTransaction, UserTransaction>();
+            container.RegisterType<IAdminRepository, AdminRepository>();
             container.RegisterType<ICreateQutation, CreateQutation>();
             container.RegisterType<IVendorService, VendorService>();
             container.RegisterType<ISmtpClient, SMTPClient>();
+
             //GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
             config.DependencyResolver = new UnityResolver(container);
             

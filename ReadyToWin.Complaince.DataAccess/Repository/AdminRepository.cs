@@ -12,6 +12,7 @@ using ReadyToWin.Complaince.Entities.RequestModels;
 using ReadyToWin.Complaince.Entities.Dashboard;
 using ReadyToWin.Complaince.Entities.ResponseModel;
 using ReadyToWin.Complaince.BussinessProvider.IProviders;
+using ReadyToWin.Complaince.Entities.UserTransaction;
 
 namespace ReadyToWin.Complaince.DataAccess.Repository
 {
@@ -54,34 +55,83 @@ namespace ReadyToWin.Complaince.DataAccess.Repository
 
         }
 
-        public DbOutput ListOfWinningUsers(Admin listOfwinningUser)
+        public List<Admin> ListOfWinningUsers()
         {
-            using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_WINNER_AMOUNT))
+            List<Admin> winningUserList = new List<Admin>();
+            DbCommand dbCommand = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_WINNER_AMOUNT);
+            _dbContextDQCPRDDB.AddOutParameter(dbCommand, "Code", DbType.String, 4000);
+            _dbContextDQCPRDDB.AddOutParameter(dbCommand, "Message", DbType.String, 4000);
+            _dbContextDQCPRDDB.AddInParameter(dbCommand, "StatementType", DbType.String, "Select");
+            using (IDataReader reader = _dbContextDQCPRDDB.ExecuteReader(dbCommand))
             {
-                
-                _dbContextDQCPRDDB.AddInParameter(command, "StatementType", DbType.String, "Select");
-                _dbContextDQCPRDDB.ExecuteNonQuery(command);
-                return new DbOutput()
+                while (reader.Read())
                 {
-                    Code = Convert.ToInt32(_dbContextDQCPRDDB.GetParameterValue(command, "Code")),
-                    Message = Convert.ToString(_dbContextDQCPRDDB.GetParameterValue(command, "Message"))
-                };
+                    winningUserList.Add(GenerateFromDataReader(reader));
+                }
             }
+            return winningUserList;
+        }
+        private Admin GenerateFromDataReader(IDataReader reader)
+        {
+            Admin userList = new Admin();
+            userList.Id = GetLongIntegerFromDataReader(reader, "Id");
+            userList.UserId = GetLongIntegerFromDataReader(reader, "UserId");
+            userList.GameTypeId = GetLongIntegerFromDataReader(reader, "GameTypeId");
+            userList.GameTypeName = GetStringFromDataReader(reader, "GameTypeName");
+            userList.GameCategoryId = GetLongIntegerFromDataReader(reader, "GameCategoryId");
+            userList.CategoryName = GetStringFromDataReader(reader, "CategoryName");
+            userList.GameSubCategoryId = GetLongIntegerFromDataReader(reader, "GameSubCategoryId");
+            userList.GameSubCategoryName = GetStringFromDataReader(reader, "GameSubCategoryName");
+            userList.NumberType = GetStringFromDataReader(reader, "NumberType");
+            userList.WinningAmount = GetDoubleFromDataReader(reader, "WinningAmount");
+            userList.Remarks = GetStringFromDataReader(reader, "Remarks");
+            userList.ApprovedAmount = GetDoubleFromDataReader(reader, "ApprovedAmount");            
+            userList.AdminUserId = GetLongIntegerFromDataReader(reader, "AdminUserId");
+            userList.IsActive = GetBooleanFromDataReader(reader, "IsActive");
+            userList.IsDeleted = GetBooleanFromDataReader(reader, "IsDeleted");
+            userList.CreatedDate = GetDateFromDataReader(reader, "CreatedDate");
+            userList.CreatedBy = GetStringFromDataReader(reader, "CreatedBy");
+            userList.UpdatedDate = GetDateFromDataReader(reader, "UpdatedDate");
+            userList.UpdatedBy = GetStringFromDataReader(reader, "UpdatedBy");
+            return userList;
         }
 
-        public DbOutput ListOfWinningUsersById(Admin listOfwinningUserbyId)
+        public List<Admin> ListOfWinningUsersById(Admin Id)
         {
-            using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_WINNER_AMOUNT))
+            List<Admin> winningUserList = new List<Admin>();
+            DbCommand dbCommand = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_WINNER_AMOUNT);
+            _dbContextDQCPRDDB.AddInParameter(dbCommand, "Id", DbType.Int64, Id.Id);
+            _dbContextDQCPRDDB.AddOutParameter(dbCommand, "Code", DbType.String, 4000);
+            _dbContextDQCPRDDB.AddOutParameter(dbCommand, "Message", DbType.String, 4000);
+            _dbContextDQCPRDDB.AddInParameter(dbCommand, "StatementType", DbType.String, "Select By RecordId");
+            using (IDataReader reader = _dbContextDQCPRDDB.ExecuteReader(dbCommand))
             {
-                _dbContextDQCPRDDB.AddInParameter(command, "Id", DbType.Int64, listOfwinningUserbyId.Id);
-                _dbContextDQCPRDDB.AddInParameter(command, "StatementType", DbType.String, "Select By RecordId");
-                _dbContextDQCPRDDB.ExecuteNonQuery(command);
-                return new DbOutput()
+                while (reader.Read())
                 {
-                    Code = Convert.ToInt32(_dbContextDQCPRDDB.GetParameterValue(command, "Code")),
-                    Message = Convert.ToString(_dbContextDQCPRDDB.GetParameterValue(command, "Message"))
-                };
+                    winningUserList.Add(GenerateFromDataReader(reader));
+                }
             }
+            return winningUserList;            
+        }
+
+        public List<Admin> ListOfUserWinningByUserId(Admin userWinbyUserId)
+        {
+            List<Admin> winningUserListbyUserId = new List<Admin>();
+            DbCommand dbCommand = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_WINNER_AMOUNT);
+            _dbContextDQCPRDDB.AddInParameter(dbCommand, "UserId", DbType.Int64, userWinbyUserId.UserId);
+            _dbContextDQCPRDDB.AddOutParameter(dbCommand, "Code", DbType.String, 4000);
+            _dbContextDQCPRDDB.AddOutParameter(dbCommand, "Message", DbType.String, 4000);
+            _dbContextDQCPRDDB.AddInParameter(dbCommand, "StatementType", DbType.String, "Select By UserId");
+            using (IDataReader reader = _dbContextDQCPRDDB.ExecuteReader(dbCommand))
+            {
+                while (reader.Read())
+                {
+                    winningUserListbyUserId.Add(GenerateFromDataReader(reader));
+                }
+            }
+            return winningUserListbyUserId;
+
+            
         }
         public DbOutput UpdateWinningUser(Admin updateWiinerUserDetails)
         {
@@ -114,23 +164,23 @@ namespace ReadyToWin.Complaince.DataAccess.Repository
 
         }
 
-        public DbOutput DeleteWinningUser(Admin deleteWinnerUser)
-        {
-            using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_WINNER_AMOUNT))
-            {
-                _dbContextDQCPRDDB.AddInParameter(command, "Id", DbType.Int64, deleteWinnerUser.Id);
-                _dbContextDQCPRDDB.AddInParameter(command, "UserId", DbType.Int64, deleteWinnerUser.UserId);
-                _dbContextDQCPRDDB.AddOutParameter(command, "Code", DbType.String, 4000);
-                _dbContextDQCPRDDB.AddOutParameter(command, "Message", DbType.String, 4000);
-                _dbContextDQCPRDDB.AddInParameter(command, "StatementType", DbType.String, "Delete");
-                _dbContextDQCPRDDB.ExecuteNonQuery(command);
-                return new DbOutput()
-                {
-                    Code = Convert.ToInt32(_dbContextDQCPRDDB.GetParameterValue(command, "Code")),
-                    Message = Convert.ToString(_dbContextDQCPRDDB.GetParameterValue(command, "Message"))
-                };
-            }
-        }
+        //public DbOutput DeleteWinningUser(Admin deleteWinnerUser)
+        //{
+        //    using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_WINNER_AMOUNT))
+        //    {
+        //        _dbContextDQCPRDDB.AddInParameter(command, "Id", DbType.Int64, deleteWinnerUser.Id);
+        //        _dbContextDQCPRDDB.AddInParameter(command, "UserId", DbType.Int64, deleteWinnerUser.UserId);
+        //        _dbContextDQCPRDDB.AddOutParameter(command, "Code", DbType.String, 4000);
+        //        _dbContextDQCPRDDB.AddOutParameter(command, "Message", DbType.String, 4000);
+        //        _dbContextDQCPRDDB.AddInParameter(command, "StatementType", DbType.String, "Delete");
+        //        _dbContextDQCPRDDB.ExecuteNonQuery(command);
+        //        return new DbOutput()
+        //        {
+        //            Code = Convert.ToInt32(_dbContextDQCPRDDB.GetParameterValue(command, "Code")),
+        //            Message = Convert.ToString(_dbContextDQCPRDDB.GetParameterValue(command, "Message"))
+        //        };
+        //    }
+        //}
         public DbOutput UserDepositAmountApproved(Admin approvedAmount)
         {
             using (DbCommand command = _dbContextDQCPRDDB.GetStoredProcCommand(DBConstraints.USER_DEPOSIT_AMOUNT_APPROVED))
@@ -139,7 +189,9 @@ namespace ReadyToWin.Complaince.DataAccess.Repository
                 _dbContextDQCPRDDB.AddInParameter(command, "UserId", DbType.Int64, approvedAmount.UserId);
                 _dbContextDQCPRDDB.AddInParameter(command, "ApprovedAmount", DbType.Decimal, approvedAmount.ApprovedAmount);
                 _dbContextDQCPRDDB.AddInParameter(command, "Remarks", DbType.String, approvedAmount.Remarks);
-                _dbContextDQCPRDDB.AddInParameter(command, "AdminUserId", DbType.Int64, approvedAmount.AdminUserId);                 
+                _dbContextDQCPRDDB.AddInParameter(command, "AdminUserId", DbType.Int64, approvedAmount.AdminUserId);
+                _dbContextDQCPRDDB.AddOutParameter(command, "Code", DbType.String, 4000);
+                _dbContextDQCPRDDB.AddOutParameter(command, "Message", DbType.String, 4000);
                 _dbContextDQCPRDDB.ExecuteNonQuery(command);
                 return new DbOutput()
                 {
@@ -157,6 +209,8 @@ namespace ReadyToWin.Complaince.DataAccess.Repository
                 _dbContextDQCPRDDB.AddInParameter(command, "ApprovedAmount", DbType.Decimal, approvedAmount.ApprovedAmount);
                 _dbContextDQCPRDDB.AddInParameter(command, "Remarks", DbType.String, approvedAmount.Remarks);
                 _dbContextDQCPRDDB.AddInParameter(command, "AdminUserId", DbType.Int64, approvedAmount.AdminUserId);
+                _dbContextDQCPRDDB.AddOutParameter(command, "Code", DbType.String, 4000);
+                _dbContextDQCPRDDB.AddOutParameter(command, "Message", DbType.String, 4000);
                 _dbContextDQCPRDDB.ExecuteNonQuery(command);
                 return new DbOutput()
                 {

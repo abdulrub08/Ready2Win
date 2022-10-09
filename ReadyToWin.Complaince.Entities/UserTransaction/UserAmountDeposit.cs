@@ -18,6 +18,7 @@ namespace ReadyToWin.Complaince.Entities.UserTransaction
     {
         public long Id { get; set; }
         public long UserId { get; set; }
+        public string UserName { get; set; }
         [Required]
         [Display(Name = "DepositAmount")]
         public decimal DepositAmount { get; set; }
